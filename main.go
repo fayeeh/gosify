@@ -11,6 +11,7 @@ func main() {
 	if len(os.Args) > 1 {
 		port = os.Args[1]
 	}
+	fmt.Println(port)
 	server := NewServer(port)
 	
 	server.AddCommands(
@@ -21,6 +22,6 @@ func main() {
 			},
 		},
 	)
-
-	fmt.Println(server.GetCommands()[0])
+	
+	server.Start()
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"net"
+	"fmt"
 )
 
 type CallbackFunction = func(*Server, []string)
@@ -25,10 +26,13 @@ func (s *Server) GetCommands() []*Command {
 	return s.commands
 }
 func (s *Server) Start() {
-	ln, err := net.Listen("tcp", ":8080")
+	ln, err := net.Listen("tcp", s.Port)
 	if err != nil {
 		// TODO handle error
 	}
+	defer ln.Close()
+	
+	fmt.Println("Server started at: ", s.Port)
 
 	for { 
 		conn, err := ln.Accept()
@@ -41,6 +45,24 @@ func (s *Server) Start() {
 }
 
 func (s *Server) handleConnection(conn net.Conn) {
+	defer conn.Close()
+	
+	fmt.Println("Client Connected")
+	for {
+		str, err := Read(conn)
+		
+		if err != nil {
+			break
+		}
+
+		err = Write(conn, str) 
+
+		if err != nil {
+			break
+		}
+	}
+	fmt.Println("Client disconnected")
+
 }
 func NewServer(port string) *Server {
 	return &Server{
