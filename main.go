@@ -12,6 +12,15 @@ func main() {
 		port = os.Args[1]
 	}
 	server := NewServer(port)
+	
+	server.AddCommands(
+		&Command{
+			Name: "help",
+			Description: "Shows this message",
+			Run: func(server *Server, args []string) {
+			},
+		},
+	)
 
-	fmt.Println(server.Port)
+	fmt.Println(server.GetCommands()[0])
 }
