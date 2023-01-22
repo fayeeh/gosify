@@ -1,10 +1,9 @@
 package main
 
 import (
-	"net"
 	"bufio"
+	"net"
 )
-
 
 func Read(conn net.Conn) (string, error) {
 	reader := bufio.NewReader(conn)
