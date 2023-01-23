@@ -4,14 +4,13 @@ import (
 	"errors"
 	"fmt"
 	"net"
-	"strings"
+	"github.com/google/shlex"
 )
 
 type CallbackFunction = func(*Server, []string, net.Conn) error
 
 type Command struct {
 	Name        string
-	Description string
 	Aliases     []string
 	Run         CallbackFunction
 }
@@ -68,7 +67,7 @@ func (s *Server) handleConnection(conn net.Conn) {
 			break
 		}
 
-		args := strings.Fields(str)
+		args, _ := shlex.Split(str)
 
 		if len(args) < 1 {
 			continue

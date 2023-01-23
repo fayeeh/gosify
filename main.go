@@ -17,15 +17,20 @@ func main() {
 		&Command{
 			Name:        "help",
 			Aliases:     []string{"h", "HELP"},
-			Description: "Shows this message",
 			Run: func(server *Server, args []string, conn net.Conn) error {
-				Write(conn, "Hello\n")
+				helpmsg := `Usage: 
+[]: optional, <>: required
+commands:
+  help shows this command  help
+  echo echo                echo <msg>`
+
+				Write(conn, helpmsg)
 				return nil
 			},
 		},
 		&Command{
 			Name:        "echo",
-			Description: "Echo",
+			Aliases:     []string{},
 			Run: func(server *Server, args []string, conn net.Conn) error {
 				if len(args) < 2 {
 					return errors.New("err: too few arguments for echo command")
