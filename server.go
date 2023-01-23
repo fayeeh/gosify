@@ -46,7 +46,7 @@ func (s *Server) Start() {
 	}
 	defer ln.Close()
 
-	fmt.Println("Server started at: ", s.Port)
+	fmt.Printf("Server started at: %s\n", s.Port)
 
 	for {
 		conn, err := ln.Accept()
