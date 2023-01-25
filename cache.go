@@ -49,7 +49,7 @@ func (c *Cache) Remove(name string) {
 	}
 }
 
-func (c *Cache) Start() {
+func (c *Cache) Run() {
 	ticker := time.NewTicker(time.Second)
 
 	go func() {
@@ -64,6 +64,12 @@ func (c *Cache) deleteExpired() {
 		if time.Now().After(elem.Expire) && !elem.Expire.IsZero() {
 			c.Remove(elem.Name)
 		}
+	}
+}
+
+func NewCache() *Cache {
+	return &Cache{
+		Items: make([]*Item, 0),
 	}
 }
 

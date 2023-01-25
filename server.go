@@ -3,16 +3,16 @@ package main
 import (
 	"errors"
 	"fmt"
-	"net"
 	"github.com/google/shlex"
+	"net"
 )
 
 type CallbackFunction = func(*Server, []string, net.Conn) error
 
 type Command struct {
-	Name        string
-	Aliases     []string
-	Run         CallbackFunction
+	Name    string
+	Aliases []string
+	Run     CallbackFunction
 }
 
 type Server struct {
