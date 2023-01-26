@@ -10,4 +10,7 @@ RM a
 ```
 
 With the 3rd parameter we specify how many seconds it will be deleted. (It can be minutes or hours)
-For time durations: (Click)[https://pkg.go.dev/time#ParseDuration]
+
+For time durations: [Click](https://pkg.go.dev/time#ParseDuration)
+
+Note: If the 3rd parameter is empty, the data will not be deleted.
