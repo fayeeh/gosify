@@ -26,20 +26,12 @@ func main() {
 commands:
   help shows this command  help
   echo echo                echo <msg>
+  set set data			   set <key> <value> [duration] # Look https://pkg.go.dev/time#ParseDuration for duration
+  get get data             get <key>
+  rm  delete data          rm <key>
 `
 
 				Write(conn, helpmsg)
-				return nil
-			},
-		},
-		&Command{
-			Name:    "echo",
-			Aliases: []string{},
-			Run: func(server *Server, args []string, conn net.Conn) error {
-				if len(args) < 2 {
-					return errors.New("err: too few arguments for echo command\n")
-				}
-				Write(conn, args[1]+"\n")
 				return nil
 			},
 		},
