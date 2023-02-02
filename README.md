@@ -1,6 +1,6 @@
 Gosify is a Redis-like(?) database.
 
-Key and value are strings. (It was easy for me)
+Key and value are strings.
 
 Basic usage:
 ```
